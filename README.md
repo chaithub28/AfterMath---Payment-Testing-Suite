@@ -75,3 +75,30 @@ Import `postman/Aftermath_Payment_API.postman_collection.json` into Postman. Sta
 
 ## Project honesty note
 Run the tests and verify their results before claiming they passed. Sample defect reports are templates/examples for learning; they are not claims of bugs discovered in a production system.
+
+## Automated Test Coverage
+
+The project includes 10 automated tests written with `pytest` and FastAPI's test client.
+
+| Test scenario | Expected result |
+|---|---|
+| Health endpoint | API responds successfully |
+| Successful payment | Payment is created and saved |
+| Simulated decline | Payment is saved with a failed status |
+| Zero amount | Request is rejected |
+| Negative integer amount | Request is rejected |
+| Negative decimal amount | Request is rejected |
+| Missing amount | Request is rejected |
+| Unknown payment ID | API returns HTTP 404 |
+| Duplicate payment prevention | Repeated idempotency key does not create a duplicate payment |
+| Invalid currency | Request is rejected |
+
+### Run the tests
+
+```bash
+python -m pytest -v
+```
+
+**Latest local test result:** 10 passed, 1 warning.
+
+The warning relates to a deprecated testing dependency and does not indicate a failed test. Results may vary if the code or dependencies change.
